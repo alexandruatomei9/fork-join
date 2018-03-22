@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 public class ParallelStreams {
 
     public static void main(String[] args) {
-        Stream.of("John", "Mike", "Ryan","Donald", "Matthew").forEach(System.out::println);
+        Stream.of("John", "Mike", "Ryan", "Donald", "Matthew").forEach(System.out::println);
 
         System.out.println("------");
 
@@ -16,6 +16,12 @@ public class ParallelStreams {
         System.out.println("------");
 
         count();
+
+        System.out.println("------");
+
+        int[] unsortedArray = {1, 3, 4, 2, 9, 6, 5};
+        Arrays.parallelSort(unsortedArray);
+        Arrays.stream(unsortedArray).forEach(i -> System.out.print(i + " "));
     }
 
     private static void count() {
