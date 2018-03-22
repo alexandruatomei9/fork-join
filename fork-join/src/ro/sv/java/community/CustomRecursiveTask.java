@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
-/**
- * Created by Alex on 3/20/2018.
- */
 public class CustomRecursiveTask extends RecursiveTask<Integer> {
 
     private int[] arr;

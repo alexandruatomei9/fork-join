@@ -5,17 +5,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveAction;
-import java.util.logging.Logger;
 
-/**
- * Created by Alex on 3/20/2018.
- */
 public class CustomRecursiveAction extends RecursiveAction {
 
-    private String workLoad = "";
+    private String workLoad;
     private static final int THRESHOLD = 4;
-
-    private static Logger logger = Logger.getAnonymousLogger();
 
     public CustomRecursiveAction(String workLoad) {
         this.workLoad = workLoad;
@@ -25,28 +19,28 @@ public class CustomRecursiveAction extends RecursiveAction {
     protected void compute() {
 
         if (workLoad.length() > THRESHOLD) {
-            ForkJoinTask.invokeAll(createSubtasks());
+            ForkJoinTask.invokeAll(createSubTasks());
         } else {
             process(workLoad);
         }
     }
 
-    private Collection<CustomRecursiveAction> createSubtasks() {
+    private Collection<CustomRecursiveAction> createSubTasks() {
 
-        List<CustomRecursiveAction> subtasks = new ArrayList<>();
+        List<CustomRecursiveAction> subTasks = new ArrayList<>();
 
         String partOne = workLoad.substring(0, workLoad.length() / 2);
         String partTwo = workLoad.substring(workLoad.length() / 2, workLoad.length());
 
-        subtasks.add(new CustomRecursiveAction(partOne));
-        subtasks.add(new CustomRecursiveAction(partTwo));
+        subTasks.add(new CustomRecursiveAction(partOne));
+        subTasks.add(new CustomRecursiveAction(partTwo));
 
-        return subtasks;
+        return subTasks;
     }
 
     private void process(String work) {
         String result = work.toUpperCase();
-        logger.info("This result - (" + result + ") - was processed by " + Thread.currentThread()
+        System.out.println("This result - (" + result + ") - was processed by " + Thread.currentThread()
                 .getName());
     }
 }
